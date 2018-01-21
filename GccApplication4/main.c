@@ -57,6 +57,8 @@ int main(void)
 	
 	*/
 	
+	
+	
 	while(1)
 	{
 		//if (!(BUTTON_LOW_PORT.IN & BUTTON0_PINCTRL)) {  
@@ -64,7 +66,11 @@ int main(void)
 			//USB_USART_MODULE.DATA = pad_scan();
 		//}
 		
-		printf("%04x", pad_scan());
+		//printf("%04x", pad_scan());
+		
+		printf("B"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(pad_scan()));
+		
+		printf("\n");
 		_delay_ms(100);
 	}
 }
