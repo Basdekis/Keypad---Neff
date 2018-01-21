@@ -31,36 +31,30 @@
 	
 	*/
 
-void initPad(){
+initPad(){
 	//lines
 	PORTD.DIR = (PIN4_bm | PIN5_bm | PIN6_bm | PIN7_bm);
 	//rows
-	//PORTD.DIR |= (PIN3_bm | PIN2_bm | PIN1_bm | PIN0_bm);
-	PORTD.PIN4CTRL = PORT_OPC_PULLDOWN_gc;
-	PORTD.PIN5CTRL = PORT_OPC_PULLDOWN_gc;
-	PORTR.PIN0CTRL = PORT_OPC_PULLDOWN_gc;
-	PORTR.PIN1CTRL = PORT_OPC_PULLDOWN_gc;
+	PORTD.DIR |= (PIN3_bm | PIN2_bm | PIN1_bm | PIN0_bm);
 }
 
 uint16_t pad_scan(){
-	PORTD.IN = 0;
-	
 	uint16_t buttonstates = 0x00;
 	
-	//PORTD.OUT = PIN4_bm;
-	//buttonstates |= (PORTD.IN & 0x0f);
-	//
-	//PORTD.OUT = PIN5_bm;
-	//buttonstates = (buttonstates << 4);
-	//buttonstates |= (PORTD.IN & 0x0f);
-	//
-	//PORTR.OUT = PIN0_bm;
-	//buttonstates = (buttonstates << 8);
-	//buttonstates |= (PORTD.IN & 0x0f);
-	//
-	//PORTR.OUT = PIN1_bm;
-	//buttonstates = (buttonstates << 12);
-	//buttonstates |= (PORTD.IN & 0x0f);
+	PORTD.OUT = PIN4_bm;
+	buttonstates |= (PORTD.IN);
+	
+	PORTD.OUT = PIN5_bm;
+	buttonstates = (buttonstates << 4);
+	buttonstates |= (PORTD.IN);
+	
+	PORTD.OUT = PIN6_bm;
+	buttonstates = (buttonstates << 8);
+	buttonstates |= (PORTD.IN);
+	
+	PORTD.OUT = PIN7_bm;
+	buttonstates = (buttonstates << 12);
+	buttonstates |= (PORTD.IN);
 	
 	PORTD.OUT = 0x00;
 	return buttonstates;
